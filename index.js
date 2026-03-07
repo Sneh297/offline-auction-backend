@@ -32,7 +32,10 @@ app.post("/validate",async (req,res)=>{
     try{
         const foundLicense = await License.findOne({uuid:license})
         if(foundLicense){
-            res.cookie("license", license, { maxAge: 24*60*60*1000 });
+            res.cookie("license", license, { maxAge: 24*60*60*1000 ,
+                 secure: true,      
+  sameSite: "none"  
+            });
              res.json({ message: "License valid" });
         }else{
             res.json({valid:false})
