@@ -11,7 +11,7 @@ const License = require('./models/License');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: "https://offline-auction-backend.onrender.com", // your frontend origin
+  origin: process.env.FRONT, // your frontend origin
   credentials: true                 // allow cookies to be sent
 }));
 
