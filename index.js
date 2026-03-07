@@ -34,7 +34,7 @@ app.post("/validate",async (req,res)=>{
         if(foundLicense){
             res.cookie("license", license, { maxAge: 24*60*60*1000 ,
                  secure: true,      
-  sameSite: "none"  
+                sameSite: "none"  
             });
              res.json({ message: "License valid" });
         }else{
@@ -46,6 +46,16 @@ app.post("/validate",async (req,res)=>{
     }
 })
 
+
+app.get("/check-license", (req, res) => {
+  const license = req.cookies.license;
+
+  if (license) {
+    res.json({ valid: true });
+  } else {
+    res.json({ valid: false });
+  }
+});
 
 
 
