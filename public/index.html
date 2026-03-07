@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate License</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #license {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generate License Key</h1>
+    <button id="generateBtn">Generate License</button>
+    <div id="license"></div>
+
+    <script>
+        const btn = document.getElementById("generateBtn");
+        const licenseDiv = document.getElementById("license");
+
+        btn.addEventListener("click", async () => {
+            try {
+                // Use relative URL since HTML is served from Express
+                const response = await fetch("/generate");
+                const data = await response.json();
+                licenseDiv.textContent = `Your License: ${data.license}`;
+            } catch (err) {
+                licenseDiv.textContent = "Error generating license";
+                console.error(err);
+            }
+        });
+    </script>
+</body>
+</html>
