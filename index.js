@@ -11,8 +11,8 @@ const License = require('./models/License');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: process.env.FRONT, // your frontend origin
-  credentials: true                 // allow cookies to be sent
+  origin: process.env.FRONT, 
+  credentials: true             
 }));
 
 app.get("/generate-license", (req, res) => {
@@ -32,7 +32,7 @@ app.post("/validate",async (req,res)=>{
     try{
         const foundLicense = await License.findOne({uuid:license})
         if(foundLicense){
-            res.cookie("license", license, { maxAge: 30*24*60*60*1000 });
+            res.cookie("license", license, { maxAge: 24*60*60*1000 ,secure: true });
              res.json({ message: "License valid" });
         }else{
             res.json({valid:false})
