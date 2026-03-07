@@ -5,13 +5,15 @@ const cron = require('node-cron');
 const path = require('path');
 const axios = require('axios');
 require('dotenv').config();
+const cookieParser = require("cookie-parser");
 
 const License = require('./models/License');
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors({
-  origin: process.env.FRONT, 
+  origin: [process.env.FRONT , "http://localhost:5000"], 
   credentials: true             
 }));
 
